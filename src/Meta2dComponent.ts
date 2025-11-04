@@ -7,12 +7,11 @@ import {useMeta2d} from "./renderer/hooks/useMeta2d";
 export const Meta2dComponent = defineComponent({
     setup(_props, { slots, expose, attrs }) {
         const dom = shallowRef<HTMLElement>()
-        const container = shallowRef<Meta2d>()
+        const meta2dInstance = shallowRef<Meta2d>()
         const config = useGetPropsByAttrs(attrs)
         function mount() {
             const meta2d = useMeta2d(dom.value,config)
-
-            container.value = markRaw(meta2d.meat2d)
+            meta2dInstance.value = markRaw(meta2d.meat2d)
             const app = createApp({
                 render: () => renderSlot(slots, 'default'),
             })
@@ -20,7 +19,7 @@ export const Meta2dComponent = defineComponent({
         }
 
         function unMount() {
-            container.value!.destroy()
+            meta2dInstance.value!.destroy()
         }
 
         onMounted(() => {
@@ -29,7 +28,7 @@ export const Meta2dComponent = defineComponent({
         })
 
         onUnmounted(unMount)
-        expose({ app: container })
+        expose({ app: meta2dInstance })
 
         return () => h('div', { ref: dom })
     },

@@ -8,7 +8,6 @@ export const renderer = createRenderer<Pen, Pen>({
     createElement(tag, namespace?, isCustomizedBuiltIn?,props?) {
         let element: Promise<Pen>
         const instance = getCurrentInstance()
-        console.log(instance.appContext.provides,'instaance')
         const meta2d = useMeta2d()
         element = meta2d.meat2d.addPen({
             name:tag,
