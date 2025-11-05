@@ -24,7 +24,6 @@ export const Meta2dComponent = defineComponent({
 
         onMounted(() => {
             mount()
-            // useEffectUpdate(attrs, container.value as unknown as ElementWithProps)
         })
 
         onUnmounted(unMount)
